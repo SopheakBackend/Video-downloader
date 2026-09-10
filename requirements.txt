@@ -1,0 +1,5 @@
+Django~=5.0.4
+python-decouple==3.8
+yt-dlp>=2025.1.1
+curl-cffi>=0.7.0
+certifi>=2024.0.0
