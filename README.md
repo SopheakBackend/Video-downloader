@@ -1,4 +1,4 @@
-# Video Downloader 🚀
+# Video Downloader 
 
 A simple Django app for downloading YouTube and X/Twitter videos powered by `yt-dlp` and `ffmpeg`.
 
@@ -6,7 +6,7 @@ A simple Django app for downloading YouTube and X/Twitter videos powered by `yt-
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com
+   git clone https://github.com/SopheakBackend/Video-downloader.git
    cd Video-downloader
    ```
 
