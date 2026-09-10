@@ -85,11 +85,4 @@ python manage.py runserver
 
 Visit `http://127.0.0.1:8000` in your browser, paste a YouTube or X/Twitter video URL, and choose a resolution to download.
 
-## Notes
 
-- Downloaded files are temporarily cached in `download/download_cache/` during processing and are cleaned up automatically after being served.
-- yt-dlp's extraction logic depends on YouTube/Twitter's current site behavior and can break when they change things. If downloads start failing unexpectedly, try updating yt-dlp:
-  ```bash
-  pip install -U yt-dlp
-  ```
-- This project uses Django's built-in development server (`runserver`), which is fine for local use but not for production. Use a proper WSGI/ASGI server (e.g. gunicorn, uvicorn) if you ever deploy this.
