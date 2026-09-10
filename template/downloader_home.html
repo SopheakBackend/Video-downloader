@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Universal Video Downloader</title>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+</head>
+<body>
+<div class="container">
+    <h2>Youtube/Twitter Video downloader</h2>
+    <p>Paste your Youtube or X/Twitter video link below:</p>
+    
+    <!-- Active Messages Alerts Loop -->
+    {% if messages %}
+        <ul class="messages-container">
+            {% for message in messages %}
+                <li class="alert-{{ message.tags }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <!-- FIXED: Added explicit POST method attributes and input name configurations -->
+    <form method="POST" action="{% url 'downloader_home' %}">
+        {% csrf_token %}
+        <input type="text" name="video_url" class="input-field" placeholder="Paste your Youtube or twitter url here..." required>
+        <button type="submit" class="submit-btn">Download</button>
+    </form>
+</div>
+</body>
+</html>

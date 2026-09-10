@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video downloader</title>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h3>{{ title }}</h3>
+
+        {% if thumbnail %}
+            <img src="{{ thumbnail }}" class="thumbnail" alt="Video Thumbnail">
+        {% endif %}
+
+        <!-- NEW UPDATE: Optimization Warning Notice Banner for Old Videos -->
+        <div class="speed-warning-box">
+            <strong>Tip:</strong> If this video is old (released several years ago), please choose <strong>720p</strong> or lower to avoid an incredibly slow download.
+        </div>
+
+        <h4>Available resolutions:</h4>
+        <ul class="resolution-list">
+            {% for res in resolutions %}
+                <li class="resolution-item">
+                    <a href="{% url 'processing_download' %}?url={{ video_url|urlencode }}&height={{ res.height }}" class="download-btn">
+                        {{ res.height }}p({{ res.ext }})
+                    </a>
+                </li>
+            {% empty %}
+                <p style="color:red;">No video is available to download. Please use a valid link/URL.</p>
+            {% endfor %}
+        </ul>
+        <br>
+        <a href="{% url 'downloader_home' %}" style="color: #666; text-decoration:none">Download another video</a>
+    </div>
+
+    <div id="loading-overlay">
+        <div class="spinner"></div>
+        <div class="loading-text">Processing video & audio Track....</div>
+        <div class="loading-subtext">
+            High-definition files (1080p, 2k, 4k) are being combined on the server. Please wait while your file is being prepared. DO NOT RELOAD THIS WINDOW!
+        </div>
+    </div>
+
+    <script>
+        const downlaodingButtons = document.querySelectorAll('.download-btn');
+        const loadingOverlay = document.getElementById('loading-overlay');
+
+        downlaodingButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                loadingOverlay.style.display = 'block';
+                setTimeout(() => {
+                    loadingOverlay.style.display = 'none';
+                }, 10000);
+            });
+        });
+    </script>
+</body>
+</html>
